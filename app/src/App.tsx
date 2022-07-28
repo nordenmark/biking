@@ -1,26 +1,15 @@
-import { Status, Wrapper } from "@googlemaps/react-wrapper";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./App.css";
-import { Map } from "./components/Map";
-import { ConfigService } from "./config.service";
+import { Home } from "./Home";
 
-const render = (status: Status) => {
-  switch (status) {
-    case Status.LOADING:
-      return <p>loading...</p>;
-    case Status.FAILURE:
-      return <p>error</p>;
-    case Status.SUCCESS:
-      return <Map />;
-  }
-};
+// Create a client
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="App">
-      <Wrapper apiKey={ConfigService.googleMapsApiKey} render={render}>
-        <Map />
-      </Wrapper>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <Home />
+    </QueryClientProvider>
   );
 }
 
