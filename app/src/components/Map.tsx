@@ -12,7 +12,6 @@ export const Map: FC<MapProps> = ({ sessions, center, zoom }) => {
 
   useEffect(() => {
     if (ref.current) {
-      console.log("sessions", sessions);
       const map = new window.google.maps.Map(ref.current, {
         center,
         zoom,

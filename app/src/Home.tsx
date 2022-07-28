@@ -18,9 +18,7 @@ const render = (sessions: Session[]) => (status: Status) => {
 };
 
 const fetchSessions = () =>
-  fetch("http://localhost:1323/sessions", {
-    headers: { Accept: "application/json", "Content-Type": "application/json" },
-  }).then((response) => response.json());
+  fetch(`${ConfigService.apiUrl}/sessions`).then((response) => response.json());
 
 export const Home: FC = () => {
   const { isLoading, data } = useQuery(["sessions"], fetchSessions);
