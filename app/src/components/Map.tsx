@@ -17,24 +17,25 @@ export const Map: FC<MapProps> = ({ sessions, center, zoom }) => {
         zoom,
       });
 
-      const points: google.maps.LatLng[] = [];
       const bounds = new google.maps.LatLngBounds();
 
       sessions.forEach((session) => {
+        const points: google.maps.LatLng[] = [];
+
         session.points.forEach(({ lat, lng }) => {
           const point = new google.maps.LatLng(lat, lng);
           points.push(point);
           bounds.extend(point);
         });
-      });
 
-      const polyline = new google.maps.Polyline({
-        path: points,
-        strokeColor: "#FF0000",
-        strokeOpacity: 0.7,
-        strokeWeight: 3,
+        const polyline = new google.maps.Polyline({
+          path: points,
+          strokeColor: "#ff0000",
+          strokeOpacity: 0.7,
+          strokeWeight: 3,
+        });
+        polyline.setMap(map);
       });
-      polyline.setMap(map);
 
       map.fitBounds(bounds);
     }
